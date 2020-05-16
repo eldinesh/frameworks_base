@@ -5429,8 +5429,14 @@ public final class Settings {
           * Where to show network traffic indicator
           * @hide
           */
-          public static final String NETWORK_TRAFFIC_LOCATION = "network_traffic_location";
+        public static final String NETWORK_TRAFFIC_LOCATION = "network_traffic_location";
 
+        /**
+          * What to show in the network traffic indicator
+          * @hide
+          */
+        public static final String NETWORK_TRAFFIC_MODE = "network_traffic_mode";
+        
         /**
          * Whether to show material Dismiss All Button for notifications
          * @hide
