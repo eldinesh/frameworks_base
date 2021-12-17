@@ -253,6 +253,7 @@ import com.android.wm.shell.startingsurface.SplashscreenContentDrawer;
 import com.android.wm.shell.startingsurface.StartingSurface;
 
 import com.android.internal.util.custom.NavbarUtils;
+import com.android.internal.util.altho.ThemesUtils;
 
 import java.io.FileDescriptor;
 import java.io.PrintWriter;
@@ -678,6 +679,7 @@ public class StatusBar extends SystemUI implements
     private final NetworkController mNetworkController;
     private final LifecycleRegistry mLifecycle = new LifecycleRegistry(this);
     protected final BatteryController mBatteryController;
+    private IOverlayManager mOverlayManager;
     protected boolean mPanelExpanded;
     private IOverlayManager mOverlayManager;
     private UiModeManager mUiModeManager;
