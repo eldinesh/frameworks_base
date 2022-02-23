@@ -23,5 +23,15 @@
 <dimen name="net_traffic_multi_text_size">8dp</dimen>
 <dimen name="net_traffic_sb_multi_text_size">13dp</dimen>
 <dimen name="net_traffic_txt_img_padding">2dp</dimen>
+    
+<!-- Tri-state UI -->
+<style name="qs_theme" parent="Theme.SystemUI.QuickSettings">
+    <item name="android:windowIsFloating">true</item>
+</style>
+   
+<!-- Pure Tuner Theme-->
+<style name="ExTunerSettings" parent="@android:style/Theme.DeviceDefault.Settings">
+    <item name="preferenceTheme">@style/TunerPreferenceTheme</item>
+</style>
 
 </resources>
