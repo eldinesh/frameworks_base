@@ -5434,6 +5434,12 @@ public final class Settings {
         public static final String SHOW_VOLTE_ICON = "show_volte_icon";
 
         /**
+         * VoLTE icon style
+         * @hide
+         */
+        public static final String VOLTE_ICON_STYLE = "volte_icon_style";
+
+        /**
          * These are all public system settings
          *
          * @hide
