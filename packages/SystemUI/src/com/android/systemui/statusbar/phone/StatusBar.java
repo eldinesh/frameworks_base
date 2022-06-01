@@ -4329,30 +4329,6 @@ public class StatusBar extends SystemUI implements
                 }
             }
         }
-
-
-    @Override
-    public void onTuningChanged(String key, String newValue) {
-        switch (key) {
-            case NOTIFICATION_MATERIAL_DISMISS:
-                mShowDimissButton =
-                        TunerService.parseIntegerSwitch(newValue, false);
-                updateDismissAllVisibility(true);
-                updateDismissAllButton();
-                break;
-            case NOTIFICATION_MATERIAL_DISMISS_STYLE:
-                mClearAllButtonStyle =
-                        TunerService.parseInteger(newValue, 0);
-                updateDismissAllButton();
-                break;
-            case NOTIFICATION_MATERIAL_DISMISS_BGSTYLE:
-                mClearAllBgStyle =
-                        TunerService.parseInteger(newValue, 0);
-                updateDismissAllButton();
-                break;
-            default:
-                break;
-         }
     }
 
     // End Extra BaseStatusBarMethods.
