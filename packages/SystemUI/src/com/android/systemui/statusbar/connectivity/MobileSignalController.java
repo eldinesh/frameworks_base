@@ -19,6 +19,7 @@ import static com.android.settingslib.mobile.MobileMappings.getDefaultIcons;
 import static com.android.settingslib.mobile.MobileMappings.getIconKey;
 import static com.android.settingslib.mobile.MobileMappings.mapIconSets;
 
+import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.ContentResolver;
 import android.content.Intent;
@@ -30,6 +31,7 @@ import android.net.NetworkCapabilities;
 import android.net.Uri;
 import android.os.Handler;
 import android.os.Looper;
+import android.os.UserHandle;
 import android.provider.Settings;
 import android.provider.Settings.Global;
 import android.telephony.AccessNetworkConstants;
@@ -514,8 +516,6 @@ public class MobileSignalController extends SignalController<MobileState, Mobile
                 + " from " + mImsManager);
         Log.d(mTag, "removeRegistrationCallback " + mRegistrationCallback
                 + " from " + mImsManager);
-    }private boolean isVolteSwitchOn() {
-        return mImsManager != null && mImsManager.isEnhanced4gLteModeSettingEnabledByUser();
     }
 
     private int getVolteResId() {
@@ -527,9 +527,6 @@ public class MobileSignalController extends SignalController<MobileState, Mobile
         }
         return resId;
     }
-
-    private int getVolteResId() {
-        int resId = 0;
 
         if (mCurrentState.imsRegistered && mVolteIcon) {
             switch(mVoLTEstyle) {
@@ -565,54 +562,6 @@ public class MobileSignalController extends SignalController<MobileState, Mobile
             }
         }
         return resId;
-    }
-
-    private void setListeners() {
-        if (mImsManager == null) {
-            Log.e(mTag, "setListeners mImsManager is null");
-            return;
-        }
-
-        try {
-            mImsManager.addCapabilitiesCallback(mCapabilityCallback,
-                    ConcurrentUtils.DIRECT_EXECUTOR);
-            mImsManager.addRegistrationCallback(mRegistrationCallback,
-                    ConcurrentUtils.DIRECT_EXECUTOR);
-            Log.d(mTag, "addCapabilitiesCallback " + mCapabilityCallback + " into " + mImsManager);
-            Log.d(mTag, "addRegistrationCallback " + mRegistrationCallback
-                    + " into " + mImsManager);
-        } catch (ImsException e) {
-            Log.d(mTag, "unable to addCapabilitiesCallback callback.");
-        }
-        queryImsState();
-    }
-
-    private void queryImsState() {
-        TelephonyManager tm = mPhone.createForSubscriptionId(mSubscriptionInfo.getSubscriptionId());
-        mCurrentState.voiceCapable = tm.isVolteAvailable();
-        mCurrentState.videoCapable = tm.isVideoTelephonyAvailable();
-        mCurrentState.imsRegistered = mPhone.isImsRegistered(mSubscriptionInfo.getSubscriptionId());
-        if (DEBUG) {
-            Log.d(mTag, "queryImsState tm=" + tm + " phone=" + mPhone
-                    + " voiceCapable=" + mCurrentState.voiceCapable
-                    + " videoCapable=" + mCurrentState.videoCapable
-                    + " imsResitered=" + mCurrentState.imsRegistered);
-        }
-        notifyListenersIfNecessary();
-    }
-
-    private void removeListeners() {
-        if (mImsManager == null) {
-            Log.e(mTag, "removeListeners mImsManager is null");
-            return;
-        }
-
-        mImsManager.removeCapabilitiesCallback(mCapabilityCallback);
-        mImsManager.removeRegistrationListener(mRegistrationCallback);
-        Log.d(mTag, "removeCapabilitiesCallback " + mCapabilityCallback
-                + " from " + mImsManager);
-        Log.d(mTag, "removeRegistrationCallback " + mRegistrationCallback
-                + " from " + mImsManager);
     }
 
     @Override
