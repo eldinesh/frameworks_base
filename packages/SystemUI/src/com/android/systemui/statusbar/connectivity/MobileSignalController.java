@@ -385,12 +385,11 @@ public class MobileSignalController extends SignalController<MobileState, Mobile
         if (mProviderModelBehavior) {
             mReceiverHandler.post(mTryRegisterIms);
         }
-    }
 
     mContext.registerReceiver(mVolteSwitchObserver,
                 new IntentFilter("org.codeaurora.intent.action.ACTION_ENHANCE_4G_SWITCH"));
         mFeatureConnector.connect();
-
+}
     // There is no listener to monitor whether the IMS service is ready, so we have to retry the
     // IMS registration.
     private final Runnable mTryRegisterIms = new Runnable() {
@@ -469,6 +468,49 @@ public class MobileSignalController extends SignalController<MobileState, Mobile
         return mImsManager != null && mImsManager.isEnhanced4gLteModeSettingEnabledByUser();
     }
 
+    private int getVolteResId() {
+        int resId = 0;
+
+        if ( (mCurrentState.voiceCapable || mCurrentState.videoCapable)
+                &&  mCurrentState.imsRegistered ) {
+        return resId;
+
+   }
+        if (mCurrentState.imsRegistered && mVolteIcon) {
+            switch(mVoLTEstyle) {
+                // VoLTE
+                case 1:
+                    resId = R.drawable.ic_volte1;
+                    break;
+                // OOS VoLTE
+                case 2:
+                    resId = R.drawable.ic_volte2;
+                    break;
+                // HD Icon
+                case 3:
+                    resId = R.drawable.ic_hd_volte;
+                    break;
+                // Margaritov's VoLTE icon
+                case 8:
+                    resId = R.drawable.ic_volte_margaritov;
+                    break;
+                // Margaritov's VoLTE icon2
+                case 9:
+                    resId = R.drawable.ic_volte_margaritov2;
+                    break;
+                // Vivo VoLTE icon
+                case 10:
+                    resId = R.drawable.ic_volte_vivo;
+                    break;
+                //Vo
+                case 0:
+                default:
+                    resId = R.drawable.ic_volte;
+                    break;
+            }
+        }
+        return resId;
+    }
 
     private void setListeners() {
         if (mImsManager == null) {
@@ -518,52 +560,6 @@ public class MobileSignalController extends SignalController<MobileState, Mobile
                 + " from " + mImsManager);
     }
 
-    private int getVolteResId() {
-        int resId = 0;
-
-        if ( (mCurrentState.voiceCapable || mCurrentState.videoCapable)
-                &&  mCurrentState.imsRegistered ) {
-            resId = R.drawable.ic_volte;
-        }
-        return resId;
-    }
-
-        if (mCurrentState.imsRegistered && mVolteIcon) {
-            switch(mVoLTEstyle) {
-                // VoLTE
-                case 1:
-                    resId = R.drawable.ic_volte1;
-                    break;
-                // OOS VoLTE
-                case 2:
-                    resId = R.drawable.ic_volte2;
-                    break;
-                // HD Icon
-                case 3:
-                    resId = R.drawable.ic_hd_volte;
-                    break;
-                // Margaritov's VoLTE icon
-                case 8:
-                    resId = R.drawable.ic_volte_margaritov;
-                    break;
-                // Margaritov's VoLTE icon2
-                case 9:
-                    resId = R.drawable.ic_volte_margaritov2;
-                    break;
-                // Vivo VoLTE icon
-                case 10:
-                    resId = R.drawable.ic_volte_vivo;
-                    break;
-                //Vo
-                case 0:
-                default:
-                    resId = R.drawable.ic_volte;
-                    break;
-            }
-        }
-        return resId;
-    }
-
     @Override
     public void notifyListeners(SignalCallback callback) {
         // If the device is on carrier merged WiFi, we should let WifiSignalController to control
@@ -590,7 +586,7 @@ public class MobileSignalController extends SignalController<MobileState, Mobile
 
         int resId = 0;
         if (mCurrentState.imsRegistered && mVolteIcon) {
-            resId = R.drawable.ic_volte;
+            resId = getVolteResId();
         }
 
         int volteId = mShowVolteIcon && isVolteSwitchOn() && mVolteIcon ? resId : 0;
