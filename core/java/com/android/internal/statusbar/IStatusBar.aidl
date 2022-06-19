@@ -288,4 +288,10 @@ oneway interface IStatusBar
      * Triggers a GC in the system and status bar.
      */
     void runGcForTest();
+
+    /**
+     * Altho Additions
+     */
+    void screenPinningStateChanged(boolean enabled);
+    void leftInLandscapeChanged(boolean isLeft);
 }

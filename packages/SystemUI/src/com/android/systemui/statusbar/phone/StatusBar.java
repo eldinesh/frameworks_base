@@ -180,6 +180,7 @@ import com.android.systemui.scrim.ScrimView;
 import com.android.systemui.settings.brightness.BrightnessSliderController;
 import com.android.systemui.shared.plugins.PluginManager;
 import com.android.systemui.statusbar.AutoHideUiElement;
+import com.android.systemui.pulse.VisualizerView;
 import com.android.systemui.statusbar.BackDropView;
 import com.android.systemui.statusbar.CircleReveal;
 import com.android.systemui.statusbar.CommandQueue;
@@ -245,6 +246,7 @@ import com.android.systemui.util.DumpUtilsKt;
 import com.android.systemui.util.WallpaperController;
 import com.android.systemui.util.concurrency.DelayableExecutor;
 import com.android.systemui.util.concurrency.MessageRouter;
+import com.android.systemui.statusbar.policy.PulseController;
 import com.android.systemui.volume.VolumeComponent;
 import com.android.systemui.wmshell.BubblesManager;
 import com.android.wm.shell.bubbles.Bubbles;
@@ -672,6 +674,8 @@ public class StatusBar extends SystemUI implements
     private boolean mStatusBarWindowHidden;
     private boolean mIsOccluded;
     private boolean mIsLaunchingActivityOverLockscreen;
+
+    private VisualizerView mVisualizerView;
 
     private final UserSwitcherController mUserSwitcherController;
     private final NetworkController mNetworkController;
@@ -1339,6 +1343,8 @@ public class StatusBar extends SystemUI implements
             });
         }
 
+        mVisualizerView = (VisualizerView) mNotificationShadeWindowView.findViewById(R.id.visualizerview);
+
         mReportRejectedTouch = mNotificationShadeWindowView
                 .findViewById(R.id.report_rejected_touch);
         if (mReportRejectedTouch != null) {
@@ -1603,6 +1609,11 @@ public class StatusBar extends SystemUI implements
                 mNotificationActivityStarter,
                 mPresenter);
     }
+
+
+    // this will initialize Pulse and begin listening for media events
+        mMediaManager.addCallback(Dependency.get(PulseController.class));
+
 
     /**
      * Post-init task of {@link #start()}
@@ -3283,6 +3294,7 @@ public class StatusBar extends SystemUI implements
         // bar.
         mKeyguardStateController.notifyKeyguardGoingAway(true);
         mCommandQueue.appTransitionPending(mDisplayId, true /* forced */);
+        Dependency.get(PulseController.class).notifyKeyguardGoingAway();
     }
 
     /**
@@ -3346,6 +3358,7 @@ public class StatusBar extends SystemUI implements
                 && visibleNotOccludedOrWillBe);
 
         mNotificationPanelViewController.setDozing(mDozing, animate, mWakeUpTouchLocation);
+        Dependency.get(PulseController.class).setDozing(mDozing);
         updateQsExpansionEnabled();
         Trace.endSection();
     }
@@ -4549,6 +4562,7 @@ public class StatusBar extends SystemUI implements
                     checkBarModes();
                     updateScrimController();
                     mPresenter.updateMediaMetaData(false, mState != StatusBarState.KEYGUARD);
+                    Dependency.get(PulseController.class).setKeyguardShowing(mState == StatusBarState.KEYGUARD);
                     updateKeyguardState();
                     Trace.endSection();
                 }
@@ -4589,6 +4603,10 @@ public class StatusBar extends SystemUI implements
                     maybeUpdateBarMode();
                 }
             };
+
+    public VisualizerView getLsVisualizer() {
+            return mVisualizerView;
+    }
 
     private final BatteryController.BatteryStateChangeCallback mBatteryStateChangeCallback =
             new BatteryController.BatteryStateChangeCallback() {
