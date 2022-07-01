@@ -138,7 +138,7 @@ public class Fingerprint21UdfpsMock extends Fingerprint21 implements TrustManage
 
         TestableBiometricScheduler(Context context, @NonNull String tag, @NonNull Handler handler,
                 @Nullable GestureAvailabilityDispatcher gestureAvailabilityDispatcher) {
-            super(tag, BiometricScheduler.SENSOR_TYPE_FP_OTHER, gestureAvailabilityDispatcher);
+            super(context, tag, BiometricScheduler.SENSOR_TYPE_FP_OTHER, gestureAvailabilityDispatcher);
 
         }
 
@@ -253,11 +253,7 @@ public class Fingerprint21UdfpsMock extends Fingerprint21 implements TrustManage
 
         final Handler handler = new Handler(Looper.getMainLooper());
         final TestableBiometricScheduler scheduler =
-<<<<<<< HEAD
-                new TestableBiometricScheduler(context, TAG, gestureAvailabilityDispatcher);
-=======
-                new TestableBiometricScheduler(TAG, handler, gestureAvailabilityDispatcher);
->>>>>>> android-12.1.0_r7
+                new TestableBiometricScheduler(context, TAG, handler, gestureAvailabilityDispatcher);
         final MockHalResultController controller =
                 new MockHalResultController(sensorProps.sensorId, context, handler, scheduler);
         return new Fingerprint21UdfpsMock(context, fingerprintStateCallback, sensorProps, scheduler,
