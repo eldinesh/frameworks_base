@@ -162,9 +162,4 @@ interface IStatusBarService
      * Starts the default assistant app.
      */
     void startAssist(in Bundle args);
-
-    /**
-     * Altho additions
-     */
-    void screenPinningStateChanged(boolean enabled);
 }

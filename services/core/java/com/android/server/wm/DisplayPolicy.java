@@ -1724,15 +1724,6 @@ public class DisplayPolicy {
         contentFrame.set(sTmpRect);
     }
 
-    private void notifyLeftInLandscapeChanged(boolean isOnLeft) {
-        mHandler.post(() -> {
-            StatusBarManagerInternal statusBar = getStatusBarManagerInternal();
-            if (statusBar != null) {
-                statusBar.leftInLandscapeChanged(isOnLeft);
-            }
-        });
-    }
-
     private int layoutNavigationBar(DisplayFrames displayFrames, Rect contentFrame) {
         if (mNavigationBar == null) {
             return NAV_BAR_INVALID;
@@ -1745,17 +1736,10 @@ public class DisplayPolicy {
         // atomically with screen rotations.
         final int rotation = displayFrames.mRotation;
         final int displayHeight = displayFrames.mDisplayHeight;
-        final int lastNavbarPosition = mNavigationBarPosition;
         final int displayWidth = displayFrames.mDisplayWidth;
         final int navBarPosition = navigationBarPosition(displayWidth, displayHeight, rotation);
 
         getRotatedWindowBounds(displayFrames, mNavigationBar, navigationFrame);
-
-        if (lastNavbarPosition == NAV_BAR_LEFT && mNavigationBarPosition != NAV_BAR_LEFT) {
-            notifyLeftInLandscapeChanged(false);
-        } else if (lastNavbarPosition != NAV_BAR_LEFT && mNavigationBarPosition == NAV_BAR_LEFT) {
-            notifyLeftInLandscapeChanged(true);
-        }
 
         final Rect cutoutSafeUnrestricted = sTmpRect;
         cutoutSafeUnrestricted.set(displayFrames.mUnrestricted);
