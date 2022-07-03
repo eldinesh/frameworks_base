@@ -230,7 +230,7 @@ public class InstallInstalling extends BasePackageInstallerActivity {
                 mInstallingTask.execute();
             } else {
                 // we will receive a broadcast when the install is finished
-                mCancleBtn.setEnabled(false);
+                mCancelBtn.setEnabled(false);
                 setFinishOnTouchOutside(false);
             }
         }
@@ -246,7 +246,7 @@ public class InstallInstalling extends BasePackageInstallerActivity {
 
     @Override
     public void onBackPressed() {
-        if (mCaancelBtn.isEnabled()) {
+        if (mCancelBtn.isEnabled()) {
             super.onBackPressed();
         }
     }

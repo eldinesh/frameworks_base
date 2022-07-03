@@ -124,7 +124,7 @@ public class InstallSuccess extends BasePackageInstallerActivity {
 
 
         if (enabled) {
-            m.InstallBtn.setOnClickListener(view -> {
+            mInstallBtn.setOnClickListener(view -> {
                 try {
                     startActivity(mLaunchIntent);
                 } catch (ActivityNotFoundException | SecurityException e) {
