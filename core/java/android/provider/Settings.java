@@ -5426,6 +5426,24 @@ public final class Settings {
         public static final String THREE_FINGER_GESTURE = "three_finger_gesture";
 
         /**
+          * Where to show network traffic indicator
+          * @hide
+          */
+        public static final String NETWORK_TRAFFIC_LOCATION = "network_traffic_location";
+
+        /**
+          * What to show in the network traffic indicator
+          * @hide
+          */
+        public static final String NETWORK_TRAFFIC_MODE = "network_traffic_mode";
+        
+        /**
+          * Specify refresh duration for network traffic
+          * @hide
+          */
+          public static final String NETWORK_TRAFFIC_REFRESH_INTERVAL = "network_traffic_refresh_interval";
+
+        /**
          * Whether to show material Dismiss All Button for notifications
          * @hide
          */
