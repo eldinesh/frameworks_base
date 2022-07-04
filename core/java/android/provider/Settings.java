@@ -5420,6 +5420,15 @@ public final class Settings {
         };
 
         /**
+         * Whether strict standby policy should be used. When dismissing from recents,
+         * this will force stop apps with restricted battery usage and put them into
+         * RESTRICTED standby bucket. Also all restrictions will be imposed even when
+         * device is charging.
+         * @hide
+         */
+        public static final String STRICT_STANDBY_POLICY = "strict_standby_policy";
+
+        /**
          * Swipe to screenshot
          * @hide
          */
