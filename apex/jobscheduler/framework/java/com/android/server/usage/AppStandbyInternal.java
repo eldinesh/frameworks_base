@@ -176,6 +176,4 @@ public interface AppStandbyInternal {
     void dumpState(String[] args, PrintWriter pw);
 
     boolean isAppIdleEnabled();
-
-    boolean isStrictStandbyPolicyEnabled();
 }
