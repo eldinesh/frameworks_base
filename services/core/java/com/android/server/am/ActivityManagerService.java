@@ -1562,7 +1562,7 @@ public class ActivityManagerService extends IActivityManager.Stub
 
     // Swipe to screenshot
     final SwipeToScreenshotObserver mSwipeToScreenshotObserver;
-    private boolean mIsSwipeToScrenshotEnabled;
+    private boolean mIsSwipeToScreenshotEnabled;
 
     final class UiHandler extends Handler {
         public UiHandler() {

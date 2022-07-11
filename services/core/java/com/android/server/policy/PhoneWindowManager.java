@@ -888,7 +888,6 @@ public class PhoneWindowManager implements WindowManagerPolicy {
 
     // Swipe to screenshot
     private SwipeToScreenshotListener mSwipeToScreenshot;
-    private boolean haveEnableGesture = false;
 
     private void handleRingerChordGesture() {
         if (mRingerToggleChord == VOLUME_HUSH_OFF) {
