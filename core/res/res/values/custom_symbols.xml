@@ -55,4 +55,7 @@
     <!-- Enable face auth only when swiping security view -->
     <java-symbol type="bool" name="config_faceAuthOnlyOnSecurityView" />
 
+    <!-- Whether to allow network traffic on statusbar -->
+    <java-symbol type="bool" name="config_supportsNetworkTrafficOnStatusBar" />
+
 </resources>

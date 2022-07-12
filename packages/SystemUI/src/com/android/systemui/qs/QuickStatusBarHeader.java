@@ -113,6 +113,8 @@ public class QuickStatusBarHeader extends FrameLayout implements TunerService.Tu
     private NetworkTraffic mNetworkTraffic;
     private boolean mShowNetworkTraffic;
 
+    private boolean mSupportsNetworkTrafficOnStatusBar;
+
     public QuickStatusBarHeader(Context context, AttributeSet attrs) {
         super(context, attrs);
     }
@@ -152,6 +154,9 @@ public class QuickStatusBarHeader extends FrameLayout implements TunerService.Tu
         mBatteryRemainingIcon = findViewById(R.id.batteryRemainingIcon);
 
         mNetworkTraffic = findViewById(R.id.network_traffic);
+
+        mSupportsNetworkTrafficOnStatusBar = mContext.getResources().getBoolean(
+            com.android.internal.R.bool.config_supportsNetworkTrafficOnStatusBar);
 
         updateResources();
 
@@ -584,8 +589,9 @@ public class QuickStatusBarHeader extends FrameLayout implements TunerService.Tu
     public void onTuningChanged(String key, String newValue) {
         switch (key) {
             case NETWORK_TRAFFIC_LOCATION:
-                mShowNetworkTraffic =
-                        TunerService.parseInteger(newValue, 0) == 2;
+                int networkTrafficState = TunerService.parseInteger(newValue, 0);
+                mShowNetworkTraffic = (networkTrafficState == 2 ||
+                    (networkTrafficState == 1 && !mSupportsNetworkTrafficOnStatusBar))
                 setChipVisibility(mPrivacyChip.getVisibility() == View.VISIBLE);
                 break;
             default:
