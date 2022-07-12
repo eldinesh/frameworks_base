@@ -37,10 +37,12 @@ import androidx.annotation.NonNull;
 
 import com.android.internal.policy.SystemBarUtils;
 import com.android.settingslib.Utils;
+import com.android.systemui.Dependency;
 import com.android.systemui.R;
 import com.android.systemui.battery.BatteryMeterView;
 import com.android.systemui.qs.QSDetail.Callback;
 import com.android.systemui.statusbar.phone.StatusBarContentInsetsProvider;
+import com.android.systemui.statusbar.phone.StatusBarIconController;
 import com.android.systemui.statusbar.phone.StatusBarIconController.TintedIconManager;
 import com.android.systemui.statusbar.phone.StatusIconContainer;
 import com.android.systemui.statusbar.policy.Clock;
@@ -587,6 +589,8 @@ public class QuickStatusBarHeader extends FrameLayout implements TunerService.Tu
 
     @Override
     public void onTuningChanged(String key, String newValue) {
+        mClockView.setClockVisibleByUser(!StatusBarIconController.getIconHideList(
+                mContext, newValue).contains("clock"));
         switch (key) {
             case NETWORK_TRAFFIC_LOCATION:
                 int networkTrafficState = TunerService.parseInteger(newValue, 0);
