@@ -58,4 +58,8 @@
     <!-- Whether to allow network traffic on statusbar -->
     <java-symbol type="bool" name="config_supportsNetworkTrafficOnStatusBar" />
 
+    <!-- App lock -->
+    <java-symbol type="string" name="unlock_application" />
+    <java-symbol type="array" name="config_appLockAllowedSystemApps" />
+
 </resources>
