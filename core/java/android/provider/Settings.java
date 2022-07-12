@@ -5465,6 +5465,27 @@ public final class Settings {
         public static final String QS_TRANSPARENCY = "qs_transparency";
 
         /**
+         * Network traffic indicator location
+         * 0 = Disabled
+         * 1 = Statusbar
+         * 2 = Quick statusbar
+         * @hide
+         */
+        public static final String NETWORK_TRAFFIC_LOCATION = "network_traffic_location";
+
+        /**
+         * Whether or not to hide the network traffic indicator when there is no activity
+         * @hide
+         */
+        public static final String NETWORK_TRAFFIC_AUTOHIDE = "network_traffic_autohide";
+
+        /**
+         * Measurement unit preference for network traffic
+         * @hide
+         */
+        public static final String NETWORK_TRAFFIC_UNIT_TYPE = "network_traffic_unit_type";
+
+        /**
          * Whether to wake the display when plugging or unplugging the charger
          *
          * @hide
