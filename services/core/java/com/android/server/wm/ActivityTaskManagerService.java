@@ -1233,7 +1233,7 @@ public class ActivityTaskManagerService extends IActivityTaskManager.Stub {
         userId = getActivityStartController().checkTargetUser(userId, validateIncomingUser,
                 Binder.getCallingPid(), callingUid, "startActivityAsUser");
 
-        final ActivityStarter activityStarter = getActivityStartController(
+        final ActivityStarter activityStarter = getActivityStartController()
                 .obtainStarter(intent, "startActivityAsUser")
                 .setCaller(caller)
                 .setCallingPackage(callingPackage)

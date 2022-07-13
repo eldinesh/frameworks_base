@@ -595,7 +595,7 @@ public class QuickStatusBarHeader extends FrameLayout implements TunerService.Tu
             case NETWORK_TRAFFIC_LOCATION:
                 int networkTrafficState = TunerService.parseInteger(newValue, 0);
                 mShowNetworkTraffic = (networkTrafficState == 2 ||
-                    (networkTrafficState == 1 && !mSupportsNetworkTrafficOnStatusBar))
+                    (networkTrafficState == 1 && !mSupportsNetworkTrafficOnStatusBar));
                 setChipVisibility(mPrivacyChip.getVisibility() == View.VISIBLE);
                 break;
             default:

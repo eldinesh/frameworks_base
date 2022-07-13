@@ -708,6 +708,7 @@ public class TrustManagerService extends SystemService {
         synchronized (mDeviceLockedForUser) {
             changed = isDeviceLockedInner(userId) != locked;
             mDeviceLockedForUser.put(userId, locked);
+        }
         if (changed) {
             dispatchDeviceLocked(userId, locked);
             Authorization.onLockScreenEvent(locked, userId, null,
