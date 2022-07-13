@@ -189,7 +189,7 @@ public class PhoneStatusBarView extends FrameLayout implements Callbacks {
     protected void onDetachedFromWindow() {
         super.onDetachedFromWindow();
         Dependency.get(DarkIconDispatcher.class).removeDarkReceiver(mBattery);
-        ClockController.removeDarkReceiver();
+        mClockController.removeDarkReceiver();
         mDisplayCutout = null;
 
         if (mRotationButtonController != null) {

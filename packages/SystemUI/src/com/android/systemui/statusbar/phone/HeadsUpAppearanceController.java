@@ -231,7 +231,7 @@ public class HeadsUpAppearanceController extends ViewController<HeadsUpStatusBar
 
     private void setShown(boolean isShown) {
         if (mShown != isShown) {
-            iew clockView = mClockController.getClock();
+            View clockView = mClockController.getClock();
             boolean isRightClock = clockView.getId() == R.id.clock_right;
             mShown = isShown;
             if (isShown) {
