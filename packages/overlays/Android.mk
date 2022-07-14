@@ -22,16 +22,37 @@ LOCAL_NOTICE_FILE := $(LOCAL_PATH)/../../NOTICE
 LOCAL_REQUIRED_MODULES := \
 	DisplayCutoutEmulationCornerOverlay \
 	DisplayCutoutEmulationDoubleOverlay \
-    DisplayCutoutEmulationHoleOverlay \
+        DisplayCutoutEmulationHoleOverlay \
 	DisplayCutoutEmulationTallOverlay \
 	DisplayCutoutEmulationWaterfallOverlay \
 	FontNotoSerifSourceOverlay \
+	NavigationBarMode2ButtonOverlay \
+	IconPackCircularAndroidOverlay \
+	IconPackCircularSettingsOverlay \
+	IconPackCircularSystemUIOverlay \
+	IconPackVictorAndroidOverlay \
+        IconPackOOSAndroidOverlay \
+        IconPackOOSSystemUIOverlay \
+	IconPackVictorSettingsOverlay \
+	IconPackVictorSystemUIOverlay \
+	IconPackSamAndroidOverlay \
+	IconPackSamSettingsOverlay \
+	IconPackSamSystemUIOverlay \
+	IconPackKaiAndroidOverlay \
+	IconPackKaiSettingsOverlay \
+	IconPackKaiSystemUIOverlay \
+	IconPackFilledAndroidOverlay \
+	IconPackFilledSettingsOverlay \
+	IconPackFilledSystemUIOverlay \
+	IconPackRoundedAndroidOverlay \
+	IconPackRoundedSettingsOverlay \
+	IconPackRoundedSystemUIOverlay \
 	NavigationBarMode3ButtonOverlay \
 	NavigationBarModeGesturalOverlay \
 	NavigationBarModeGesturalOverlayNarrowBack \
 	NavigationBarModeGesturalOverlayWideBack \
 	NavigationBarModeGesturalOverlayExtraWideBack \
-        OneHandedModeGesturalOverlay \
+	OneHandedModeGesturalOverlay \
 	preinstalled-packages-platform-overlays.xml
 
 include $(BUILD_PHONY_PACKAGE)
